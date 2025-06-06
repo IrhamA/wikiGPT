@@ -1,18 +1,24 @@
-This project serves as a generative AI model that allows users to query data exclusively from wikipedia sources
+# WikiGPT
+A minimal question-answering tool that uses Wikipedia content and an LLM to answer natural language queries.
 
-Given a query find all relevant articles relating to that query.
+## Features
+- Semantic search over Wikipedia article titles
+- Chunk-based retrieval using sentence embeddings and FAISS
+- Context-aware answer generation with Cohere's LLM
+- Modular, extensible architecture
 
-Initial problems:
-    As opposed to using AI to directly solve the problem, I use it as a tool to help steer me towards the correct answer
+## How It Works
+1. User asks a question.
+2. Wikipedia titles are retrieved based on semantic similarity.
+3. Articles are fetched, chunked, and embedded.
+4. Top relevant chunks are selected via FAISS.
+5. A language model generates an answer using the chunks.
 
-Chunk & Embed Wikipedia Pages (Vector Search)
-Instead of just looking at summaries:
-    Break pages into chunks (100–300 words)
-    Embed each chunk using sentence-transformers or Cohere
-    When a user asks a question, embed that too
-    Find the top N relevant chunks with cosine similarity
+## Technologies
+- Python, Wikipedia API, sentence-transformers, FAISS, Cohere
+- dotenv for config, modular Python for each stage
 
-Example Prompts:
- How do flashbangs work?
- X vs Y
- ...
+## Usage
+```bash
+pip install -r requirements.txt
+python3 main.py

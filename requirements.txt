@@ -2,3 +2,4 @@ wikipedia
 sentence-transformers
 faiss-cpu
 cohere
+numpy
