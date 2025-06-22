@@ -8,11 +8,16 @@ A minimal question-answering tool that uses Wikipedia content and an LLM to answ
 - Modular, extensible architecture
 
 ## How It Works
-1. User asks a question.
-2. Wikipedia titles are retrieved based on semantic similarity.
-3. Articles are fetched, chunked, and embedded.
-4. Top relevant chunks are selected via FAISS.
-5. A language model generates an answer using the chunks.
+1. User chooses to ask a question or explore related topics
+
+2. For questions:
+- Wikipedia titles are ranked by semantic similarity to the query
+- Top articles are fetched, chunked, embedded, and indexed
+- Relevant chunks are retrieved via FAISS
+- Cohere LLM generates an answer using these chunks
+
+3. For topics:
+- Precomputed summary embeddings are searched for related concepts 
 
 ## Technologies
 - Python, Wikipedia API, sentence-transformers, FAISS, Cohere
@@ -21,4 +26,6 @@ A minimal question-answering tool that uses Wikipedia content and an LLM to answ
 ## Usage
 ```bash
 pip install -r requirements.txt
+python3 scripts/fetch_titles_from_pagepile.py
+python3 scripts/build_summary_index.py
 python3 main.py

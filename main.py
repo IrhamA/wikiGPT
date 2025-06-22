@@ -22,10 +22,12 @@ co = cohere.Client(API_KEY)
 MODEL = SentenceTransformer('all-MiniLM-L6-v2', device='cuda' if torch.cuda.is_available() else 'cpu')
 
 # Load FAISS related-topic index and titles
-RELATED_INDEX_PATH = "wiki_summary_index.faiss"
-RELATED_TITLES_PATH = "wiki_summary_titles.pkl"
-related_index, related_titles = load_related_index(RELATED_INDEX_PATH, RELATED_TITLES_PATH)
+RELATED_INDEX_PATH = "binaries/wiki_summary_index.faiss"
+RELATED_TITLES_PATH = "binaries/wiki_summary_titles.pkl"
+#RELATED_INDEX_PATH = "binaries/wiki_longer_summary_index.faiss"
+#RELATED_TITLES_PATH = "binarieswiki_longer_summary_titles.pkl"
 
+related_index, related_titles = load_related_index(RELATED_INDEX_PATH, RELATED_TITLES_PATH)
 
 def ask_question():
     """
