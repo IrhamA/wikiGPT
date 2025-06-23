@@ -74,17 +74,37 @@ def ask_question():
     print("Answer:", response)
     print("Wikipedia Sources:", valid_articles)
 
-def find_related():
+def find_related(num_children, num_grandchildren):
     """
     Find related topics to a given topic.
     """
     topic = input("Enter a topic or phrase to find related Wikipedia concepts: ")
-    results = find_related_topics(topic, MODEL, related_index, related_titles, top_k=10)
+    results = find_related_topics(topic, MODEL, related_index, related_titles, top_k=num_children)
 
-    print("\n Related Topics:")
+    related_topics_dict = {topic: results}
     for r in results:
-        print("-", r)
+        related_topics_dict[r] = find_related_topics(r, MODEL, related_index, related_titles, top_k=num_grandchildren+1)[1:]
 
+    def print_topic_tree(root, related_topics_dict, indent="", last=True):
+        """    
+        Print the topic tree in a clean and structured format.
+        """
+        print(root)
+        children = related_topics_dict.get(root, [])
+        for i, child in enumerate(children):
+            is_last_child = (i == len(children) - 1)
+            prefix = "└── " if is_last_child else "├── "
+            print(prefix + child)
+
+            grandchildren = related_topics_dict.get(child, [])
+            for j, grandchild in enumerate(grandchildren):
+                is_last_grandchild = (j == len(grandchildren) - 1)
+                sub_prefix = "    " if is_last_child else "│   "
+                connector = "└── " if is_last_grandchild else "├── "
+                print(sub_prefix + connector + grandchild)
+
+    print("\nRelated Topics:")
+    print_topic_tree(topic, related_topics_dict)
 
 if __name__ == "__main__":
 
@@ -97,6 +117,6 @@ if __name__ == "__main__":
     if choice == "1":
         ask_question()
     elif choice == "2":
-        find_related()
+        find_related(4, 3)
     else:
         print("Invalid option.")
