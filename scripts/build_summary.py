@@ -5,7 +5,7 @@ import faiss
 from tqdm import tqdm
 from sentence_transformers import SentenceTransformer
 
-MODEL = SentenceTransformer("all-MiniLM-L6-v2")
+MODEL = SentenceTransformer("all-mpnet-base-v2")
 
 # Load your list of titles
 with open("data/articles.txt") as f:
@@ -17,11 +17,13 @@ valid_titles = []
 
 for title in tqdm(titles, desc="Fetching & embedding summaries"):
     try:
-        summary = wikipedia.summary(title)
-        #summary = summary[:MAX_CHARS]
+        summary = wikipedia.summary(title, auto_suggest = False)
         summaries.append(summary)
         valid_titles.append(title)
-    except:
+    except Exception as e:
+        print(title)
+        print(e)
+        print(type(e))
         continue
 
 # Embed all summaries
@@ -33,8 +35,8 @@ index = faiss.IndexFlatL2(dimension)
 index.add(embeddings)
 
 # Save index and titles
-faiss.write_index(index, "wiki_longer_summary_index.faiss")
-with open("wiki_longer_summary_titles.pkl", "wb") as f:
+faiss.write_index(index, "wiki_best_summary_index.faiss")
+with open("wiki_best_summary_titles.pkl", "wb") as f:
     pickle.dump(valid_titles, f)
 
 print(f"Successfully indexed {len(valid_titles)} articles.")

@@ -6,9 +6,9 @@ def generate_answer(query, chunks, cohere_client):
     """
     prompt = f"""
 
-    Using the following information, answer the question:
-    Context: {chunks}
+    Using ONLY the following information, answer the question:
     Question: {query}
+    Context: {chunks}
     Answer:"""
 
     response = cohere_client.chat(

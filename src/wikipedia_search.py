@@ -5,7 +5,7 @@ def fetch_article(title: str) -> str:
     """
     Fetch the content of a Wikipedia article by its title.
     """
-    return wikipedia.page(title).content
+    return wikipedia.page(title, auto_suggest = False).content
 
 def chunk_text(text: str, chunk_size: int = 1000, overlap=50) -> list[str]:
     """

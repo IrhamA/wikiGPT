@@ -2351,7 +2351,7 @@ Stereotype
 Scabies
 Amine
 Cider
-Dualisms
+Dualism
 Altruism
 Millipede
 Pheromone
@@ -3069,7 +3069,7 @@ Cumulonimbus cloud
 Ford Model T
 Ammonium nitrate
 ABBA
-Op art
+Optical Art
 Sexual reproduction
 Instinct
 NKVD
@@ -9992,3 +9992,9 @@ Pillow
 Astatine
 Ancient Greek philosophy
 Sublime (philosophy)
+Elliott Smith
+Combinatorial optimization
+University of Waterloo
+SpaceX
+Machine Learning
+Tetris
